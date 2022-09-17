@@ -5,6 +5,8 @@ import "@thirdweb-dev/contracts/base/ERC721Base.sol";
 import "@thirdweb-dev/contracts/extension/Ownable.sol";
 
 /// Custom collection contract done and checked
+/// Deployed already on Polygon Mumbai
+
 /// Common NFT collection for all the NFTs to be minted by the artists
 
 contract Artist3 is ERC721Base {
