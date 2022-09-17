@@ -1,40 +1,32 @@
 import "../styles/globals.css";
-import { chain, configureChains, createClient } from "@wagmi/core";
-import { publicProvider } from "@wagmi/core/providers/public";
-import { Web3ModalEthereum } from "@web3modal/ethereum";
-// import type { ConfigOptions } from "@web3modal/react";
-import { Web3ModalProvider } from "@web3modal/react";
+import "@rainbow-me/rainbowkit/styles.css";
 
-const WC_PROJECT_ID = "8c4d09e2853e4ec315597853077f08ad";
-
-// Configure chains and providers (rpc's)
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
-  [publicProvider()]
+  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
 );
 
-// Create wagmi client
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors: Web3ModalEthereum.defaultConnectors({
-    chains,
-    appName: "web3Modal",
-  }),
-  provider,
+const { connectors } = getDefaultWallets({
+  appName: "My RainbowKit App",
+  chains,
 });
 
-// Configure web3modal
-const modalConfig = {
-  projectId: WC_PROJECT_ID,
-  theme: "dark",
-  accentColor: "orange",
-};
-
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
 function MyApp({ Component, pageProps }) {
   return (
-    <Web3ModalProvider config={modalConfig} ethereumClient={wagmiClient}>
-      <Component {...pageProps} />
-    </Web3ModalProvider>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <Component {...pageProps} />
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }
 
