@@ -3,7 +3,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import lighthouse from "@lighthouse-web3/sdk";
 
-export const deployData = async ({ Name, Description, imageURI }) => {
+export const DeployData = async ({ Name, Description, imageURI }) => {
   // Sign message for authentication
   const signingResponse = await sign_message();
 
