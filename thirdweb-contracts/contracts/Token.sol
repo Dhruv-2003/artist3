@@ -109,4 +109,12 @@ contract Token is ERC20Base, Ownable, ERC721Holder {
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
+
+    function withdraw() public onlyOwner {}
+
+    /// Function to receive Ether. msg.data must be empty
+    receive() external payable {}
+
+    // Fallback function is called when msg.data is not empty
+    fallback() external payable {}
 }
