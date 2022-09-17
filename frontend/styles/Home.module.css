@@ -3,11 +3,17 @@
 }
 
 .main {
-  /* min-height: 100vh; */
-  padding: 4rem 0;
+  min-height: 92vh;
+  padding: 2rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.video {
+  /* max-width: 800px; */
+  object-fit: cover;
+  inset: 0;
 }
