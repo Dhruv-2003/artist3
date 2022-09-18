@@ -4,16 +4,145 @@
 
 .main {
   min-height: 92vh;
-  padding: 2rem 0;
+  padding: 5rem 2rem;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.video {
-  /* max-width: 800px; */
-  object-fit: cover;
-  inset: 0;
+.hero {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
+.heading {
+  padding: 1rem;
+  margin: 15px auto;
+}
+
+.create_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  margin: 25px auto;
+  padding: 2rem 2.5rem;
+  background-color: #f5f7fa;
+  /* color: #333a57; */
+  background-color: #c0b9f616;
+  /* backdrop-filter: blur(80px);
+   */
+  /* From https://css.glass */
+  /* background: #45467854; */
+  border-radius: 16px;
+  box-shadow: 0 4px 30px #0000001a;
+  backdrop-filter: blur(8.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid #ffefefb0;
+}
+
+.create_form label {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.create_form input {
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.create_form textarea {
+  border-radius: 5px;
+  width: 100%;
+  height: 150px;
+  margin: 5px 0;
+  padding: 10px;
+  margin: 8px auto;
+  font-size: 18px;
+}
+
+/* CSS */
+.btn {
+  margin: 20px 0;
+  margin-bottom: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(
+    45deg,
+    #2470d4 0%,
+    #6c56fa 51%,
+    #902fff 100%
+  );
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: scale(.95);
+}
+
+/* .image {
+  transform-origin: 50% 50%;
+  animation: jump 2s linear alternate infinite;
+}
+
+@keyframes jump {
+  0% {
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  }
+  40% {
+    transform: translate3d(0, 0%, 0) scale3d(0.7, 1, 1);
+  }
+  100% {
+    transform: translate3d(0, 0%, 0) scale3d(1, 0.7, 1);
+  }
+} */
+
+/* .image {
+  max-width: 800px;
+  border-radius: 100%;
+  animation: spin 8s infinite cubic-bezier(0.85, 0.01, 0.25, 1);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateY(-360deg) rotateX(10deg);
+  }
+
+  100% {
+    transform: rotateY(0deg) rotateX(10deg);
+  }
+} */
