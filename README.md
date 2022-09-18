@@ -25,10 +25,11 @@ These are the technologies used to build this project:
 - CSS
 - NextJS
 - Canva
+- Dribbble
 
 ### Smart contracts / backend
-- Solidity
-- IPFS
+- Solidity - For smart-contracts development
+- IPFS - To store Art data on decentralised storage
 - web3.storage
 - nft.storage
 - ThirdWeb Release 
@@ -36,4 +37,5 @@ These are the technologies used to build this project:
 
 ## Team Members
 [**Dhruv Agarwal** ](https://twitter.com/0xdhruva)- Backend and Integration
+
 [**Kushagra Sarathe** ](https://twitter.com/kushagrasarathe) - Front-end
