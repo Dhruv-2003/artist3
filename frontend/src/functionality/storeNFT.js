@@ -3,21 +3,19 @@ import axios from "axios";
 import { ethers } from "ethers";
 import lighthouse from "@lighthouse-web3/sdk";
 
-export const DeployData = async ({ Name, Description, imageURI }) => {
+export const DeployData = async ({ files }) => {
   // Sign message for authentication
-  const signingResponse = await sign_message();
+  // const signingResponse = await sign_message();
 
-  // Get a bearer token
-  const accessToken = (
-    await axios.post(`https://api.lighthouse.storage/api/auth/verify_signer`, {
-      publicKey: signingResponse.address,
-      signedMessage: signingResponse.signedMessage,
-    })
-  ).data.accessToken;
+  // // Get a bearer token
+  // const accessToken = (
+  //   await axios.post(`https://api.lighthouse.storage/api/auth/verify_signer`, {
+  //     publicKey: signingResponse.address,
+  //     signedMessage: signingResponse.signedMessage,
+  //   })
+  // ).data.accessToken;
 
-  const obj = { name: Name, description: Description, image: imageURI };
-  const blob = new Blob([JSON.stringify(obj)], { type: "application/json" });
-  const files = [new File([blob], "metadata.json")];
+  const accessToken = "dee943e1-f731-4b29-8893-5db9584cfe74";
 
   // Push file to lighthouse node
   const output = await lighthouse.deploy(files, accessToken);
