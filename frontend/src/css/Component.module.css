@@ -41,6 +41,10 @@
 
 
   
+.input {
+    margin-top: 15px;
+  }
+  
   .vr {
     margin: 0 25px;
     border-right: 2px solid #d0d6e0;

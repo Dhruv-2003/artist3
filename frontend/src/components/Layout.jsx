@@ -39,7 +39,7 @@ export default function Layout({ children }) {
             <Link href={"/account"}>Account</Link>
           </li>
 
-          <li className={styles.navLink}>
+          <li className={`${styles.navLink} ${styles.small}`}>
             <ConnectButton />
           </li>
         </ul>

@@ -58,6 +58,12 @@
   background-color: #d4d7ff;
 }
 
+.small {
+  /* max-width: 30px; */
+  font-size: 10px;
+  /* padding-right: 10rem; */
+}
+
 .navmenu {
   display: flex;
   justify-content: space-between;
