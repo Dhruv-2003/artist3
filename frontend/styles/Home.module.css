@@ -24,6 +24,8 @@
 .heading {
   padding: 1rem;
   margin: 15px auto;
+  /* font-size: 36px; */
+  letter-spacing: 5px;
 }
 
 .create_form {
@@ -68,7 +70,7 @@
   margin: 5px 0;
   padding: 10px;
   margin: 8px auto;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* CSS */
