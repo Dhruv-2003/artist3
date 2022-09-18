@@ -19,9 +19,13 @@ export default function Card(props) {
         />
       </div>
       <div className={styles.card_content}>
-        <h3><u>NFT title here</u></h3>
+        <h3>
+          <u>NFT title here</u>
+        </h3>
         <h4>Price {props.price}</h4>
-        <button className={styles2.btn}>Purachase</button>
+        <Link href={`/nft/${props.id}`}>
+          <button className={styles2.btn}>Details</button>
+        </Link>
       </div>
     </div>
   );
