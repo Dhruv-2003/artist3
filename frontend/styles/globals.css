@@ -3,10 +3,11 @@ body {
   padding: 0;
   margin: 0;
   background-color: #080426;
-  color: rgb(229, 252, 255);
+  color: #e5fcff;
+  /* color: #d4d7ff; */
   /* background-color: #000; */
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Cascadia Code",Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;
+  
 }
 
 a {

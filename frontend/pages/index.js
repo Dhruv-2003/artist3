@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import video from "../src/assets/8.png";
+import video from "../src/assets/3-bg.png";
 
 export default function Home() {
   return (
@@ -12,20 +12,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <div>
-          <h2>artist3</h2>
-          <div className={styles.video}>
-            <Image src={video} />
-            {/* <video autoPlay loop muted className="absolute inset-0 object-cover h-screen xl:h-auto">
-            <source
-              src="https://cdn.dribbble.com/users/1012997/screenshots/17411811/media/4b36be839ef0103e15ca5025b5903b40.mp4"
-              type="video/mp4"
-            />
-          </video> */}
-          </div>
+      <div className={styles.main}>
+      <main className={styles.hero}>
+        <div className={styles.s}>
+          <h1>Buy, Sell & Trade Fractional NFTs</h1>
+          <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, ipsa! Illum </span>
+        </div>
+        <div className={styles.image}>
+          <Image src={video} />
         </div>
       </main>
+      </div>
     </div>
   );
 }
