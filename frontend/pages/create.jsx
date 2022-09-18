@@ -1,39 +1,42 @@
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
-import { useAccount, useProvider, useSigner } from "wagmi";
-import { ethers, utils } from "ethers";
-import { useContract, useContractWrite } from "@thirdweb-dev/react";
-import { StoreData } from "../src/functionality/storeData";
-import { DeployData } from "../src/functionality/storeNFT";
+import { useAccount, useContract, useProvider, useSigner } from "wagmi";
+// import { ethers, utils } from "ethers";
+// import { StoreData } from "../src/functionality/storeData";
+// import { DeployData } from "../src/functionality/storeNFT";
 import { StoreMetadata } from "../src/functionality/StoreMetadata";
+import { NFT_Contract_abi, NFT_Contract_adddress } from "../src/constants";
 
 export default function create() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState([]);
 
-  const [ipfsImageURI, setIpfsImageURI] = useState("");
   const [ipfsUri, setIpfsUri] = useState("");
 
-  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+  const { address } = useAccount();
 
-  const { contract } = useContract(
-    "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
-  );
-  const { mutateAsync: mintTo } = useContractWrite(contract, "mintTo");
+  // const { contract } = useContract(
+  //   "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
+  // );
+  // const { mutateAsync: mintTo } = useContractWrite(contract, "mintTo");
+
+  const NFT_Contract = useContract({
+    addressOrName: NFT_Contract_adddress,
+    contractInterface: NFT_Contract_abi,
+    signerOrProvider: signer || provider,
+  });
 
   const uploadMetadata = async () => {
     try {
       const metadata = await StoreMetadata(image, name, description);
-      const uri = metadata.url;
-      setIpfs(uri);
-      const url = `https://ipfs.io/ipfs/${metadata.ipnft}`;
+      const url = `https://ipfs.io/ipfs/${metadata.ipnft}/metadata.json`;
+      console.log(url);
       setIpfsUri(url);
       console.log("NFT metadata uploaded to IPFS");
-      window.alert(
-        "NFT metadata uploaded to ipfs , Click on IPFS link to use the data"
-      );
-      mintNFT(address, url);
+      await mintNFT(address, url);
     } catch (err) {
       console.log(err);
     }
@@ -76,8 +79,9 @@ export default function create() {
   // mints the NFT for the user
   const mintNFT = async ({ _to, _tokenURI }) => {
     try {
-      const data = await mintTo([_to, _tokenURI]);
-      console.info("contract call successs", data);
+      const data = await NFT_Contract.mintTo(_to, _tokenURI);
+      await data.wait();
+      console.info("NFT minted");
     } catch (err) {
       console.error("contract call failure", err);
     }
@@ -88,12 +92,17 @@ export default function create() {
       <h1 className={styles.heading}>Upload your ART</h1>
       <div className={styles.create_form}>
         <label htmlFor="">NFT Title</label>
-        <input type="text" onChange={(e) => setName(e.target.value)} />
+        <input
+          type="text"
+          value={name}
+          placeholder="Name for the NFT"
+          onChange={(e) => setName(e.target.value)}
+        />
         <label htmlFor="">Upload NFT</label>
         <input
           type="file"
           accept="image/*"
-          onChange={(e) => setImage(e.target.files)}
+          onChange={(e) => setImage(e.target.files[0])}
         />
         <label htmlFor="">Description of your ART</label>
         <textarea
