@@ -34,22 +34,23 @@ export default function Home() {
             <Image className={styles.image} src={image} />
           </div>
         </main>
-        <div>
-          <li>
-            {" "}
-            - Mint Digital Proof as NFT for your Artwork for free in under 60
-            secs
-          </li>
-          <li>- All assets stored on decentralized storage like IPFS </li>
-          <li>- Control the Sale of NFT and tokens for your artwork</li>
-          <li>- Own a art piece , NFT just for fractions of the cost </li>
-          <li>
-            - Buy tokens/fractions of the NFTs and NFTs at the same platform
-          </li>
-          <li>
-            - Earn a wholesome profit from holding tokens for a short period of
+        <h2>Platform Features</h2>
+
+        <div className={styles.collection}>
+          
+          <div className={styles.feature}>All assets stored on decentralized storage like IPFS </div>
+          <div className={styles.feature}>Own a art piece , NFT just for fractions of the cost </div>
+          <div className={styles.feature}>
+            Earn a wholesome profit from holding tokens for a short period of
             time
-          </li>
+          </div>
+          <div className={styles.feature}>
+            Mint Digital Proof as NFT for your Artwork for free in under 60 secs
+          </div>
+          <div className={styles.feature}>Control the Sale of NFT and tokens for your artwork</div>
+          <div className={styles.feature}>
+            Buy tokens/fractions of the NFTs and NFTs at the same platform
+          </div>
         </div>
       </div>
     </div>

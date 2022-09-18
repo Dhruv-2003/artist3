@@ -7,7 +7,7 @@ export default function create() {
   const [description, setDescription] = useState("");
   return (
     <div className={styles.main}>
-      <h1 className={styles.heading}>Upload your NFT</h1>
+      <h1 className={styles.heading}>Upload your ART</h1>
       <div className={styles.create_form}>
         <label htmlFor="">NFT Title</label>
         <input type="text" onChange={(e) => setTitle(e.target.value)} />
