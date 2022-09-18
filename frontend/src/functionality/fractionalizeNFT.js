@@ -1,9 +1,13 @@
-import { NFT_Contract_adddress } from "../constants";
-import { useContract } from "@thirdweb-dev/react";
 import React, { useState, useEffect } from "react";
 /// same collection address for all the NFTs created by the artists
 import { NFT_Contract_adddress, Token_abi } from "../constants";
 import { isAddress } from "ethers/lib/utils";
+import { useProvider, useSigner, useContract, useAccount } from "wagmi";
+import {
+  useContract,
+  useContractRead,
+  useContractWrite,
+} from "@thirdweb-dev/react";
 
 export const fractionalization = async () => {
   const [tokenId, settokenId] = useState(0);
@@ -31,6 +35,8 @@ export const fractionalization = async () => {
   );
 
   const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
 
   const handlefractionalize = async () => {
     try {
@@ -145,13 +151,13 @@ export const fractionalization = async () => {
     _amount,
   }) => {
     try {
-      const Token_Contract_Address = useContract({
+      const Token_Contract = useContract({
         addressOrName: _tokenAddress,
         contractInterface: Token_abi,
         signerOrProvider: signer || provider,
       });
 
-      const intializetx = await Token_Contract_Address.initialize(
+      const intializetx = await Token_Contract.initialize(
         _collectionAddress,
         _tokenId,
         _amount
