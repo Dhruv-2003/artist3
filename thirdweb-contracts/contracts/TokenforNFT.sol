@@ -13,7 +13,7 @@ import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 /// The reedem is activated after the NFT is sold
 /// Token holders can profit from the same
 
-contract Token is ERC20, Ownable, ERC721Holder {
+contract TokensforNFT is ERC20, Ownable, ERC721Holder {
     IERC721A public collectionAddress;
     uint256 public tokenId;
 
@@ -53,7 +53,6 @@ contract Token is ERC20, Ownable, ERC721Holder {
         uint256 _tokenId,
         uint256 _amount
     ) ERC20(_name, _symbol) {
-        require(!initialized, "Already initalized");
         collectionAddress = IERC721A(_collectionAddress);
         collectionAddress.safeTransferFrom(msg.sender, address(this), _tokenId);
         tokenId = _tokenId;

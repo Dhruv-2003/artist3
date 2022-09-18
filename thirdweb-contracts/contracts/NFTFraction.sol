@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./Token.sol";
+import "./TokenforNFT.sol";
 
 contract NFTFraction {
     /// mapping from contract => token ID => TokenContract
-    mapping(address => mapping(uint256 => Token)) public fractionalizedTokens;
+    mapping(address => mapping(uint256 => TokensforNFT))
+        public fractionalizedTokens;
 
     // stores all the tokensintialized
-    Token[] public _tokensintialized;
+    TokensforNFT[] public _tokensintialized;
 
     /// create a new token for the NFT  , check approval before and then allow it
     function createToken(
@@ -18,7 +19,7 @@ contract NFTFraction {
         uint256 _tokenId,
         uint256 _amount
     ) public {
-        Token _token = new Token(
+        TokensforNFT _token = new TokensforNFT(
             _name,
             _symbol,
             _collectionAddress,
@@ -38,7 +39,7 @@ contract NFTFraction {
     }
 
     // returns all the token intialized , to be filtered in the frontend
-    function getTokens() public view returns (Token[] memory) {
+    function getTokens() public view returns (TokensforNFT[] memory) {
         return _tokensintialized;
     }
 }

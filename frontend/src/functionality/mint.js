@@ -39,13 +39,13 @@ export const mint = async () => {
       console.log(URL);
       console.log("Image uploaded to IPFS");
       setIpfsImageURI(URL);
-      uploadDate(URL);
+      uploadData(URL);
     } catch (err) {
       console.error("contract call failure", err);
     }
   };
 
-  const uploadDate = async ({ _name, _description, _imageURI }) => {
+  const uploadData = async ({ _name, _description, _imageURI }) => {
     try {
       console.log("Deploying the Data to IPFS via Lighthouse.storage");
       const URI = await DeployData(_name, _description, _imageURI);
