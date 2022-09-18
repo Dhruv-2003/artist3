@@ -2,7 +2,7 @@
   max-height: 8vh;
   z-index: 100;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: center;
   flex-wrap: wrap;
   padding: 0.4rem 2.5rem;
@@ -23,6 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  /* margin-right: auto; */
 }
 
 .navLink {
