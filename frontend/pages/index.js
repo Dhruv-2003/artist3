@@ -1,7 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import video from "../src/assets/3-bg.png";
+import img2 from "../src/assets/nft1.webp";
+import img1 from "../src/assets/nft2.webp";
+import img3 from "../src/assets/nft3.webp";
+import image from "../src/assets/collage2.png";
 
 export default function Home() {
   return (
@@ -13,15 +16,24 @@ export default function Home() {
       </Head>
 
       <div className={styles.main}>
-      <main className={styles.hero}>
-        <div className={styles.s}>
-          <h1>Buy, Sell & Trade Fractional NFTs</h1>
-          <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, ipsa! Illum </span>
-        </div>
-        <div className={styles.image}>
-          <Image src={video} />
-        </div>
-      </main>
+        <main className={styles.hero}>
+          <div className={styles.section}>
+            <h2>Buy, Sell & Trade Fractional NFTs</h2>
+            <span>
+              Mint NFT as a proof for your digital artwork in simple steps and
+              sell it in form of fractions directly on the platform to earn
+              from it. Token Holders earn a profit by holding the tokens for a
+              peroid of time
+            </span>
+            <div className={styles.buttons}>
+              <button className={styles.btn}>Create Listing</button>
+              <button className={styles.btn2}>Marketplace</button>
+            </div>
+          </div>
+          <div className={styles.image}>
+            <Image className={styles.image} src={image} />
+          </div>
+        </main>
       </div>
     </div>
   );

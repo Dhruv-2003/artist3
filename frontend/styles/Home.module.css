@@ -13,12 +13,32 @@
 }
 
 .hero {
+  padding: 5rem 2rem;
+  text-align: justify;
+
   width: 100%;
   display: flex;
-  justify-content: space-between;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
+}
+
+.section {
+  max-width: 800px;
+  padding: .8rem 1.5rem;
+}
+
+.image {
+  max-width: 650px;
+}
+
+.buttons {
+  display: flex;
+  padding: 12px 0;
+}
+
+.buttons button {
+  margin-right: 25px;
 }
 
 .heading {
@@ -47,10 +67,6 @@
   transition: 0.2s ease-in-out;
 }
 
-.create_form:hover {
-  /* transform: scale(1.02); */
-}
-
 .create_form label {
   margin-top: 8px;
   font-size: 16px;
@@ -73,7 +89,6 @@
   font-size: 16px;
 }
 
-/* CSS */
 .btn {
   margin: 20px 0;
   margin-bottom: 10px;
@@ -102,12 +117,43 @@
 
 .btn:hover {
   background-position: right center;
-  /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
 }
 
 .btn:active {
+  transform: scale(0.95);
+}
+
+.btn2 {
+  margin: 20px 0;
+  margin-bottom: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  border: 3px solid #6c56fa;
+  background-color: #902fff07;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn2:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn2:active {
   transform: scale(0.95);
 }
 
@@ -145,6 +191,7 @@
 
 .img {
   max-width: 800px;
+  border-radius: 15px;
 }
 
 .buy {
@@ -154,7 +201,7 @@
   align-items: flex-start;
   flex-wrap: wrap;
   border-radius: 8px;
-  margin: 25px auto;
+  margin: 35px auto;
   padding: 0.5rem 2.5rem;
   background-color: #c0b9f616;
   border-radius: 16px;
@@ -187,46 +234,62 @@
   width: 100%;
 }
 
+.nft_desc {
+  text-align: justify;
+}
+
+.nft_showcase {
+  max-width: 300px;
+}
+
 @media only screen and (max-width: 768px) {
+  .main {
+    /* text-align: start; */
+    margin: 0;
+    padding: 4rem 0;
+  }
+
+  .section {
+    padding: .8rem;
+  }
+
+  .image {
+    padding-top: 1rem;
+    margin: 0 auto;
+  }
+
+  .btn, .btn2 {
+    width: 100%;
+  }
+
+  .buttons {
+   flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .hero {
+    padding: 2rem 0.5rem;
+    text-align: justify;
+  }
+
   .collection {
     padding: 0;
   }
+
+  .heading {
+    font-size: 24px;
+  }
+
+  .img {
+    padding-bottom: 2rem;
+  }
+
+  .nft_page {
+    padding-bottom: 1rem;
+  }
+
+  .buy {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
 }
-
-/* .image {
-  transform-origin: 50% 50%;
-  animation: jump 2s linear alternate infinite;
-}
-
-@keyframes jump {
-  0% {
-    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
-  }
-  40% {
-    transform: translate3d(0, 0%, 0) scale3d(0.7, 1, 1);
-  }
-  100% {
-    transform: translate3d(0, 0%, 0) scale3d(1, 0.7, 1);
-  }
-} */
-
-/* .image {
-  max-width: 800px;
-  border-radius: 100%;
-  animation: spin 8s infinite cubic-bezier(0.85, 0.01, 0.25, 1);
-  position: relative;
-  top: 50%;
-  left: 50%;
-  margin-left: -50px;
-  margin-top: -50px;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotateY(-360deg) rotateX(10deg);
-  }
-
-  100% {
-    transform: rotateY(0deg) rotateX(10deg);
-  }
-} */
