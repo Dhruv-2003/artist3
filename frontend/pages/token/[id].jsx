@@ -26,6 +26,10 @@ export default function Token(props) {
   const router = useRouter();
   const _tokenAddress = router.query.tokenContract;
 
+  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+
   const Token_Contract = useContract({
     addressOrName: tokenAddress,
     contractInterface: Token_abi,
@@ -35,10 +39,6 @@ export default function Token(props) {
   // const { NFT_contract } = useContract(
   //   "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
   // );
-
-  const { address, isConnected } = useAccount();
-  const provider = useProvider();
-  const { data: signer } = useSigner();
 
   useEffect(async () => {
     if (_tokenAddress) {
