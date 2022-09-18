@@ -3,7 +3,6 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@thirdweb-dev/contracts/eip/interface/IERC721A.sol";
-import "@thirdweb-dev/contracts/extension/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 
 /// can control single NFT from a contract for it's fraction at a time
@@ -13,7 +12,7 @@ import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 /// The reedem is activated after the NFT is sold
 /// Token holders can profit from the same
 
-contract TokensforNFT is ERC20, Ownable, ERC721Holder {
+contract TokensforNFT is ERC20, ERC721Holder {
     IERC721A public collectionAddress;
     uint256 public tokenId;
 
@@ -58,7 +57,7 @@ contract TokensforNFT is ERC20, Ownable, ERC721Holder {
         address _collectionAddress,
         uint256 _tokenId,
         uint256 _amount
-    ) external onlyOwner {
+    ) external {
         require(!initialized, "Already initalized");
         collectionAddress = IERC721A(_collectionAddress);
         collectionAddress.safeTransferFrom(msg.sender, address(this), _tokenId);
@@ -71,7 +70,7 @@ contract TokensforNFT is ERC20, Ownable, ERC721Holder {
 
     ///@dev - intialize the token sale for the NFT
     ///@param _tokenPrice -the price of the single token owner wants to set
-    function initializeSale(uint256 _tokenPrice) external onlyOwner {
+    function initializeSale(uint256 _tokenPrice) external {
         require(initialized, "Token not initialized yet");
         tokenSaleStarted = true;
         tokenPrice = _tokenPrice;
@@ -92,7 +91,7 @@ contract TokensforNFT is ERC20, Ownable, ERC721Holder {
 
     ///@dev - close the tokenSale
     ///@dev - can be controlled by tht owner only
-    function CloseTokenSale() external onlyOwner {
+    function CloseTokenSale() external {
         require(tokenSaleStarted, "Token sale already closed");
         tokenSaleStarted = false;
         emit tokenSaleEnded();
@@ -101,7 +100,7 @@ contract TokensforNFT is ERC20, Ownable, ERC721Holder {
     ///@dev - to put the NFT on sale
     ///@dev - onlyOwner can after the tokenPresale is completed
     ///@param price -  Minm. Price of the NFT the owner wants to set
-    function putForSale(uint256 price) external onlyOwner {
+    function putForSale(uint256 price) external {
         require(tokenSaleStarted, "Token sale not completed yet");
         salePrice = price;
         saleStarted = true;
@@ -131,22 +130,18 @@ contract TokensforNFT is ERC20, Ownable, ERC721Holder {
     ///@dev - mint tokens for onlyOwner , can be called from their dashboard
     ///@param to - address to which tokens are to be minted
     ///@param amount - amount of the tokens to be minted
-    function mint(address to, uint256 amount) public onlyOwner {
+    function mint(address to, uint256 amount) public {
         _mint(to, amount);
     }
 
     ///@dev - withdraw the remaining amount in the contract
     ///@dev - will work when all the tokens are burnt
-    function withdraw() public onlyOwner {
+    function withdraw() public {
         require(totalSupply() == 0, "All token holders have not claimed yet");
         address _owner = msg.sender;
         uint256 amount = address(this).balance;
         (bool sent, ) = _owner.call{value: amount}("");
         require(sent, "Failed to send Ether");
-    }
-
-    function _canSetOwner() internal view virtual override returns (bool) {
-        return msg.sender == owner();
     }
 
     /// Function to receive Ether. msg.data must be empty

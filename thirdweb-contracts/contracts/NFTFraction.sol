@@ -37,4 +37,12 @@ contract NFTFraction {
     function getTokens() public view returns (TokensforNFT[] memory) {
         return _tokensintialized;
     }
+
+    // function changeContract(
+    //     address _collectionAddress,
+    //     uint256 _tokenId,
+    //     address _newTokenContract
+    // ) public {
+    //     fractionalizedTokens[_collectionAddress][_tokenId] = _newTokenContract;
+    // }
 }

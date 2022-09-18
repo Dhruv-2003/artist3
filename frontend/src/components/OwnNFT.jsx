@@ -14,6 +14,7 @@ import {
 } from "../constants";
 import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
+import { Contract } from "ethers";
 
 export default function OwnNFT(props) {
   const [tokenId, settokenId] = useState(0);
@@ -24,6 +25,10 @@ export default function OwnNFT(props) {
   const [tokenAddress, setTokenAddress] = useState("");
   const [isOwner, setIsOwner] = useState(false);
   const [price, setPrice] = useState(0);
+
+  const [tokenSale, setTokenSale] = useState(false);
+  const [nftSale, setNftSale] = useState(false);
+  const [intialized, setIntialized] = useState(false);
 
   const nft = props.nft;
   const [toggle, setToggle] = useState(false);
@@ -55,24 +60,26 @@ export default function OwnNFT(props) {
   const handlefractionalize = async () => {
     try {
       if (isOwner) {
-        await fractionalize(
+        // console.log(name, symbol, NFT_Contract_adddress, tokenId, amount);
+        await fractionalizeNFT(
           name,
           symbol,
           NFT_Contract_adddress,
           tokenId,
           amount
         );
-
-        // console.log(Token_address);
-        // setTokenAddress(Token_address);
-        // if (!isAddress(tokenAddress)) {
-        //   await fetchAddress();
-        //   await requestApproval(address, Token_address);
-        //   await intiateFractionalization();
-        // } else {
-        //   await requestApproval(address, Token_address);
-        //   await intiateFractionalization();
-        // }
+        const Token_address = await fetchAddress(
+          NFT_Contract_adddress,
+          tokenId
+        );
+        await requestApproval(address, Token_address);
+        await intiateFractionalization(
+          Token_address,
+          NFT_Contract_adddress,
+          tokenId,
+          amount
+        );
+        await checkStatus(Token_address);
       }
     } catch (err) {
       console.log(err);
@@ -95,15 +102,16 @@ export default function OwnNFT(props) {
   };
 
   // first approval needs to be given for the contract minted to be able to send the NFT
-  const fractionalize = async ({
+  const fractionalizeNFT = async (
     _name,
     _symbol,
     _collectionAddress,
     _tokenId,
-    _amount,
-  }) => {
+    _amount
+  ) => {
     try {
       console.log("fractionalizing the NFT");
+      console.log(_name, _symbol, _collectionAddress, _tokenId, _amount);
       const tx = await Fraction_contract.createToken(
         _name,
         _symbol,
@@ -111,61 +119,64 @@ export default function OwnNFT(props) {
         _tokenId,
         _amount
       );
-
       await tx.wait();
       console.log(tx);
       /// need to get the address of the minted contract returned
-      return data;
+      console.log("fractionalization complete");
     } catch (err) {
       console.log(err);
     }
   };
 
-  const fetchAddress = async ({ _collectionAddress, _tokenId }) => {
+  const fetchAddress = async (_collectionAddress, _tokenId) => {
     try {
       const data = await Fraction_contract.getAddress(
         _collectionAddress,
         _tokenId
       );
       console.log(data);
-      // filter the token_address
       const Token_address = data;
       setTokenAddress(Token_address);
+      return Token_address;
     } catch (err) {
       console.log(err);
     }
   };
 
-  const requestApproval = async ({ address, _tokenAddress }) => {
+  const requestApproval = async (_address, _tokenAddress) => {
     try {
+      // console.log(_tokenAddress);
       const isApproved = await NFT_Collection_Contract.isApprovedForAll(
-        address,
+        _address,
         _tokenAddress
       );
+      console.log(isApproved);
       if (!isApproved) {
         console.log("Requesting approval over NFTs...");
 
         // Send approval transaction to NFT contract
-        const approvalTxn = await setApprovalForAll(_tokenAddress, true);
+        const approvalTxn = await NFT_Collection_Contract.setApprovalForAll(
+          _tokenAddress,
+          true
+        );
         console.log("NFT Transfer Approval completed");
+        console.log(approvalTxn);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const intiateFractionalization = async ({
+  const intiateFractionalization = async (
     _tokenAddress,
     _collectionAddress,
     _tokenId,
-    _amount,
-  }) => {
+    _amount
+  ) => {
     try {
-      const Token_Contract = useContract({
-        addressOrName: _tokenAddress,
-        contractInterface: Token_abi,
-        signerOrProvider: signer || provider,
-      });
+      const Token_Contract = new Contract(_tokenAddress, Token_abi, signer);
+
+      console.log("initiating");
 
       const intializetx = await Token_Contract.initialize(
         _collectionAddress,
@@ -180,16 +191,46 @@ export default function OwnNFT(props) {
     }
   };
 
-  const intialiseSale = async () => {
+  const checkStatus = async (_tokenAddress) => {
     try {
-      const Token_Contract = useContract({
-        addressOrName: _tokenAddress,
-        contractInterface: Token_abi,
-        signerOrProvider: signer || provider,
-      });
+      const Token_Contract = new Contract(_tokenAddress, Token_abi, signer);
 
-      const tx = await Token_Contract.putForSale(price);
+      const _intialized = await Token_Contract.initialized();
+      setIntialized(_intialized);
+
+      if (intialized) {
+        const tokenSaleStarted = await Token_Contract.tokenSaleStarted();
+        setTokenSale(tokenSaleStarted);
+
+        const nftSaleStarted = await Token_Contract.saleStarted();
+        setNftSale(nftSaleStarted);
+      } else {
+        console.log("Not yet intialized");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const startTokenSale = async (_tokenAddress) => {
+    try {
+      const Token_Contract = new Contract(_tokenAddress, Token_abi, signer);
+      console.log("Starting the sale for the tokens...");
+      const tx = await Token_Contract.initializeSale(tokenPrice);
       await tx.wait();
+      console.log("Token Sale started");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const startNFTSale = async (_tokenAddress) => {
+    try {
+      const Token_Contract = new Contract(_tokenAddress, Token_abi, signer);
+      console.log("Starting the sale for the NFTs...");
+      const tx = await Token_Contract.putForSale(NFTPrice);
+      await tx.wait();
+      console.log("NFT Sale started");
     } catch (err) {
       console.log(err);
     }
@@ -202,7 +243,7 @@ export default function OwnNFT(props) {
           <Image
             className={styles.image}
             //  src={ coverPhoto ? coverPhoto.url : image}
-            src={image_}
+            src={image ? image : image_}
             alt="Property image"
             width={"300px"}
             height={"220px"}
@@ -230,19 +271,21 @@ export default function OwnNFT(props) {
           <input
             className={styles.input}
             type="number"
-            onClick={(e) => setAmount(e.target.value)}
+            onChange={(e) => setAmount(e.target.value)}
           />
           <label htmlFor="">Enter name of the token </label>
           <input
             className={styles.input}
             type="text"
-            onClick={(e) => setName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <label htmlFor="">Enter symbol of the token</label>
           <input
             className={styles.input}
             type="text"
-            onClick={(e) => setSymbol(e.target.value)}
+            value={symbol}
+            onChange={(e) => setSymbol(e.target.value)}
           />
           <hr className={styles2.hr} />
           <button
@@ -251,6 +294,33 @@ export default function OwnNFT(props) {
           >
             Publish Tokens
           </button>
+          {intialized ? (
+            <div>
+              {!nftSale ? (
+                <button
+                  onClick={startNFTSale(tokenAddress)}
+                  className={`${styles2.btn} ${styles2.center}`}
+                >
+                  Start NFT Sale
+                </button>
+              ) : (
+                <a></a>
+              )}
+
+              {!tokenSale ? (
+                <button
+                  onClick={startTokenSale(tokenAddress)}
+                  className={`${styles2.btn} ${styles2.center}`}
+                >
+                  Start Token Sale
+                </button>
+              ) : (
+                <a></a>
+              )}
+            </div>
+          ) : (
+            <a></a>
+          )}
         </div>
       ) : (
         ""
