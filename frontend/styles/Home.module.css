@@ -37,18 +37,17 @@
   border-radius: 8px;
   margin: 25px auto;
   padding: 2rem 2.5rem;
-  background-color: #f5f7fa;
-  /* color: #333a57; */
   background-color: #c0b9f616;
-  /* backdrop-filter: blur(80px);
-   */
-  /* From https://css.glass */
-  /* background: #45467854; */
   border-radius: 16px;
   box-shadow: 0 4px 30px #0000001a;
   backdrop-filter: blur(8.9px);
   -webkit-backdrop-filter: blur(8.9px);
   border: 1px solid #ffefefb0;
+  transition: .2s ease-in-out;
+}
+
+.create_form:hover {
+  /* transform: scale(1.02); */
 }
 
 .create_form label {
@@ -108,7 +107,21 @@
 }
 
 .btn:active {
-  transform: scale(.95);
+  transform: scale(0.95);
+}
+
+.collection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 4rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .collection {
+    padding: 0;
+  }
 }
 
 /* .image {
