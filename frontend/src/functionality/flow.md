@@ -11,7 +11,7 @@
 3. Take input of name , symbol of token , total supply
 4. show option to control token sale , NFT sale , withdraw
 
-## NFT Fractionalization
+## NFT Fractionalization(Component)
 
 1. after entering the required details set the NFT transfer approval for all
 2. then create the token and transfer the NFT to it
@@ -30,8 +30,12 @@
 3. Give option to enter the price and intiate the transaction
 4. After Sold , remove the NFT from the page
 
-## Token Sale Page
+## Token Sale Page(Token Marketplace)
 
 1. Show all the tokens where the token sale is started
 2. give option to choose the no of tokens to be minted and calculate the value
 3. Intiate the tx and deduct the amount calculated and calling mint from the contract
+
+## Token page
+
+1. Show details of the tokens

@@ -18,16 +18,11 @@ contract NFTFraction {
         address _collectionAddress,
         uint256 _tokenId,
         uint256 _amount
-    ) public {
-        TokensforNFT _token = new TokensforNFT(
-            _name,
-            _symbol,
-            _collectionAddress,
-            _tokenId,
-            _amount
-        );
+    ) public returns (address) {
+        TokensforNFT _token = new TokensforNFT(_name, _symbol);
         fractionalizedTokens[_collectionAddress][_tokenId] = _token;
         _tokensintialized.push(_token);
+        return address(_token);
     }
 
     function getAddress(address _collectionAddress, uint256 _tokenId)
