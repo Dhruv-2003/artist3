@@ -4,7 +4,6 @@ import logo from "../assets/logo2.png";
 import Image from "next/image";
 import Link from "next/link";
 
-
 import React, { useState } from "react";
 
 export default function Layout({ children }) {
@@ -31,11 +30,12 @@ export default function Layout({ children }) {
         >
           <li className={styles.navLink}>Home</li>
           <li className={styles.navLink}>
-            <Link href={'/create'}>
-            Create
-            </Link>
+            <Link href={"/create"}>Create</Link>
           </li>
-          <li className={styles.navLink}>Marketplace</li>
+          <li className={styles.navLink}>
+            <Link href={"/marketplace"}>Marketplace</Link>
+          </li>
+
           <li className={styles.navLink}>
             <ConnectButton />
           </li>
