@@ -21,9 +21,9 @@ export default function Home() {
             <h2>Buy, Sell & Trade Fractional NFTs</h2>
             <span>
               Mint NFT as a proof for your digital artwork in simple steps and
-              sell it in form of fractions directly on the platform to earn
-              from it. Token Holders earn a profit by holding the tokens for a
-              peroid of time
+              sell it in form of fractions directly on the platform to earn from
+              it. Token Holders earn a profit by holding the tokens for a peroid
+              of time
             </span>
             <div className={styles.buttons}>
               <button className={styles.btn}>Create Listing</button>
@@ -34,6 +34,23 @@ export default function Home() {
             <Image className={styles.image} src={image} />
           </div>
         </main>
+        <div>
+          <li>
+            {" "}
+            - Mint Digital Proof as NFT for your Artwork for free in under 60
+            secs
+          </li>
+          <li>- All assets stored on decentralized storage like IPFS </li>
+          <li>- Control the Sale of NFT and tokens for your artwork</li>
+          <li>- Own a art piece , NFT just for fractions of the cost </li>
+          <li>
+            - Buy tokens/fractions of the NFTs and NFTs at the same platform
+          </li>
+          <li>
+            - Earn a wholesome profit from holding tokens for a short period of
+            time
+          </li>
+        </div>
       </div>
     </div>
   );
