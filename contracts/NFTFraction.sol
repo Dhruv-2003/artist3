@@ -38,7 +38,7 @@ contract NFTFraction {
     }
 
     // returns all the token intialized , to be filtered in the frontend
-    function getTokens() public view returns (Token[] memory) {
+    function getTokens() public view returns (Token[]) {
         return _tokensintialized;
     }
 }

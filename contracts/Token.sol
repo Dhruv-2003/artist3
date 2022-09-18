@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@thirdweb-dev/contracts/Base/ERC20Base.sol";
 import "@thirdweb-dev/contracts/eip/interface/IERC721A.sol";
 import "@thirdweb-dev/contracts/extension/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
+import "@openzeppelin/contracts@4.7.3/token/ERC721/utils/ERC721Holder.sol";
 
 /// can control single NFT from a contract for it's fraction at a time
 /// fractionalize the NFT and store it
@@ -13,7 +13,7 @@ import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 /// The reedem is activated after the NFT is sold
 /// Token holders can profit from the same
 
-contract Token is ERC20, Ownable, ERC721Holder {
+contract Token is ERC20Base, Ownable, ERC721Holder {
     IERC721A public collectionAddress;
     uint256 public tokenId;
 
@@ -78,7 +78,7 @@ contract Token is ERC20, Ownable, ERC721Holder {
         require(tokenSaleStarted, "Not for sale!");
         require(_amount <= total, "Token amount incorrect");
         require(msg.value >= tokenPrice * _amount, "Not enough amount sent");
-        sold += _amount;
+        _sold += _amount;
         _mint(msg.sender, _amount);
         emit tokenBought(_amount);
     }
@@ -101,7 +101,7 @@ contract Token is ERC20, Ownable, ERC721Holder {
         emit NFTsaleStart(price);
     }
 
-    ///@dev - to purchase the NFT by any user for the amount greater than the salePrice
+    ///@dev- to purchase the NFT by any user for the amount greater than the salePrice
     function purchaseNFT() external payable {
         require(saleStarted, "Not for sale!");
         require(msg.value >= salePrice, "Not enough amount sent");
@@ -136,10 +136,6 @@ contract Token is ERC20, Ownable, ERC721Holder {
         uint256 amount = address(this).balance;
         (bool sent, ) = _owner.call{value: amount}("");
         require(sent, "Failed to send Ether");
-    }
-
-    function _canSetOwner() internal view virtual override returns (bool) {
-        return msg.sender == owner();
     }
 
     /// Function to receive Ether. msg.data must be empty
