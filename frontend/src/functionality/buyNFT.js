@@ -33,20 +33,13 @@ export const buyToken = async () => {
   const provider = useProvider();
   const { data: signer } = useSigner();
 
-  useEffect(async () => {
-    if (_tokenAddress) {
-      settokenAddress(_tokenAddress);
-      await fetchTokenData(_tokenAddress);
-    }
-  }, []);
-
   const fetchTokenData = async ({ _tokenAddress }) => {
     try {
       const { address } = useContractRead(
         Fraction_contract,
         "getAddress",
-        _collectionAddress,
-        _tokenId
+        nftAddress,
+        tokenId
       );
 
       // filter the address first
