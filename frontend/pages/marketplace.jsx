@@ -1,7 +1,16 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../src/components/Card";
 import TokenCard from "../src/components/TokenCard";
 import styles from "../styles/Home.module.css";
+
+// import { useContract } from "@thirdweb-dev/react";
+import { NFT_Contract_adddress, Token_abi } from "../src/constants";
+import { isAddress } from "ethers/lib/utils";
+// import { useProvider, useSigner, useContract, useAccount } from "wagmi";
+import { ethers } from "ethers";
+import { useContract, useContractRead } from "@thirdweb-dev/react";
+
+
 
 export default function marketplace() {
   const [toggleState, setToggleState] = useState(1);

@@ -377,7 +377,7 @@
   background: #adacffe4;
   border-radius: 10px;
   z-index: -1;
-  transition: transform .5s ease;
+  transition: transform .7s ease;
 }
 
 @media only screen and (max-width: 768px) {
