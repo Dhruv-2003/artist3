@@ -232,6 +232,8 @@
 
 .hr {
   width: 100%;
+  border-color: #3a4f89;
+  margin-top: 15px;
 }
 
 .nft_desc {

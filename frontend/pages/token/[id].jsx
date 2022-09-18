@@ -6,13 +6,13 @@ import Image from "next/image";
 export default function Token(props) {
   return (
     <div className={styles.nft_page}>
-      <h1 className={styles.heading}>NFT title here</h1>
+      <h1 className={styles.heading}>Token Title here</h1>
       <div className={styles.nft_section}>
         <div className={styles.img}>
           <Image className={styles.img} src={image} />
         </div>
         <div className={styles.right}>
-          <h2>NFT Description</h2>
+          <h2>NFT and Token Description</h2>
           <h4 className={styles.nft_desc}>
             {props.desc}
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
@@ -20,15 +20,13 @@ export default function Token(props) {
           </h4>
 
           <div className={styles.buy}>
-            <h3>Purchase Fraction</h3>
-            <label htmlFor="">You Pay</label>
+            <h3>Purchase Token</h3>
+            <label htmlFor="">Enter amount of your choice</label>
             <input type="number" />
-            <label htmlFor="">You Recieve</label>
-            <input type="number" />
-            <h4 htmlFor="">Estimated Gas + Fees = $ 0.235 {props.gasfee}</h4>
+            <label htmlFor="">You will recieve {props.token} 20 Tokens</label>
             <hr className={styles.hr} />
             <button className={`${styles.btn} ${styles.center}`}>
-              Purchase
+              Get Tokens
             </button>
           </div>
         </div>

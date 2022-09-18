@@ -20,7 +20,7 @@ export default function NFT(props) {
           </h4>
 
           <div className={styles.buy}>
-            <h3>Purchase Fraction</h3>
+            <h3>Purchase NFT</h3>
             <label htmlFor="">You Pay</label>
             <input type="number" />
             <label htmlFor="">You Recieve</label>
