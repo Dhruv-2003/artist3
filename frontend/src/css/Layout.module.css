@@ -68,6 +68,14 @@
   /* margin: 5px 0; */
 }
 
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top:  1px solid #4a4f92;
+  flex-wrap: wrap;
+}
+
 @media only screen and (max-width: 768px) {
   .navbar {
     padding: 0.4rem 0.5rem;

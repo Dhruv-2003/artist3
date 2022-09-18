@@ -18,7 +18,7 @@ export default function Home() {
       <div className={styles.main}>
         <main className={styles.hero}>
           <div className={styles.section}>
-            <h1>Buy, Sell & Trade Fractional NFTs</h1>
+            <h2>Buy, Sell & Trade Fractional NFTs</h2>
             <span>
               Mint NFT as a proof for your digital artwork in simple steps and
               sell it in form of fractions directly on the platform to earn

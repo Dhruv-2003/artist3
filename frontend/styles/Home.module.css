@@ -25,10 +25,11 @@
 
 .section {
   max-width: 800px;
+  padding: .8rem 1.5rem;
 }
 
 .image {
-  max-width: 680px;
+  max-width: 650px;
 }
 
 .buttons {
@@ -64,10 +65,6 @@
   -webkit-backdrop-filter: blur(8.9px);
   border: 1px solid #ffefefb0;
   transition: 0.2s ease-in-out;
-}
-
-.create_form:hover {
-  /* transform: scale(1.02); */
 }
 
 .create_form label {
@@ -252,8 +249,21 @@
     padding: 4rem 0;
   }
 
+  .section {
+    padding: .8rem;
+  }
+
   .image {
     padding-top: 1rem;
+    margin: 0 auto;
+  }
+
+  .btn, .btn2 {
+    width: 100%;
+  }
+
+  .buttons {
+   flex-direction: column;
     margin: 0 auto;
   }
 

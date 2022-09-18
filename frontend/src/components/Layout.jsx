@@ -57,8 +57,29 @@ export default function Layout({ children }) {
         </button>
       </nav>
       {children}
-      <footer>
-        <h3>footer</h3>
+      <footer className={styles.footer}>
+        <h4>
+          Built by{" "}
+          <u>
+            <a
+              href="https://twitter.com/kushagrasarathe"
+              target="_blankspace"
+              rel="noreferrer"
+            >
+              Kushagra Sarathe
+            </a>
+          </u>
+          <span> &#38; </span>
+          <u>
+            <a
+              href="https://twitter.com/0xdhruva"
+              target="_blankspace"
+              rel="noreferrer"
+            >
+              Dhruv Agarwal
+            </a>
+          </u>
+        </h4>
       </footer>
     </>
   );
