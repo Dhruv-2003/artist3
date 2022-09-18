@@ -49,19 +49,22 @@ contract TokensforNFT is ERC20, Ownable, ERC721Holder {
         ERC20(_name, _symbol)
     {}
 
+    ///@dev -  Intialize the token by transferring the NFT to the contract first
+    ///@dev - first approval needs to be given for this contract to be able to transfer the NFT
+    ///@param _collectionAddress -  address of the NFT collection
+    ///@param _tokenId -  token ID of the NFT
+    ///@param _amount - amount of the token to be issue
     function initialize(
         address _collectionAddress,
         uint256 _tokenId,
-        uint256 _amount,
-        uint256 _tokenPrice
+        uint256 _amount
     ) external onlyOwner {
         require(!initialized, "Already initalized");
-        collectionAddress = IERC721(_collectionAddress);
+        collectionAddress = IERC721A(_collectionAddress);
         collectionAddress.safeTransferFrom(msg.sender, address(this), _tokenId);
         tokenId = _tokenId;
         initialized = true;
         tokenSaleStarted = true;
-        tokenPrice = _tokenPrice;
         total = _amount;
         emit tokenCreated(_collectionAddress, _tokenId, _amount);
     }

@@ -5,7 +5,7 @@ export const NFT_Contract_adddress =
   "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470";
 
 export const NFT_Fraction_Address =
-  "0x3F6aD784B27f0E56568d7057099DFd62a345FE0d";
+  "0x787FD6F86c692B8FbB0452B399fd5302201BFf79";
 
 import abi_nft_Contract from "../../thirdweb-contracts/artifacts/contracts/NFTCollection.sol/Artist3.json";
 export const NFT_Contract_abi = abi_nft_Contract;
@@ -13,5 +13,5 @@ export const NFT_Contract_abi = abi_nft_Contract;
 import abi_nft_fraction_Contract from "../../thirdweb-contracts/artifacts/contracts/NFTFraction.sol/NFTFraction.json";
 export const NFT_Fraction_abi = abi_nft_fraction_Contract;
 
-import abi_token_contract from "../../thirdweb-contracts/artifacts/contracts/Token.sol/Token.json";
+import abi_token_contract from "../../thirdweb-contracts/artifacts/contracts/TokenforNFT.sol/TokensforNFT.json";
 export const Token_abi = abi_token_contract;

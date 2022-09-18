@@ -41,19 +41,4 @@ export const account = async () => {
       console.log(err);
     }
   };
-
-  const fractionalize = async ({}) => {
-    try {
-      const data = await createToken([
-        _name,
-        _symbol,
-        _collectionAddress,
-        _tokenId,
-        _amount,
-      ]);
-      console.info("contract call successs", data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 };
