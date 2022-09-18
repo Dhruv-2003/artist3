@@ -33,7 +33,6 @@ contract TokensforNFT is ERC20, Ownable, ERC721Holder {
 
     /// Events for the Tokens/ fractions created
     event tokenCreated(
-        string name,
         address _contractAddress,
         uint256 _tokenId,
         uint256 _amount
@@ -46,19 +45,25 @@ contract TokensforNFT is ERC20, Ownable, ERC721Holder {
     event NFTsaleStart(uint256 NFTPrice);
     event NFTsold(uint256 _price, address buyer);
 
-    constructor(
-        string memory _name,
-        string memory _symbol,
+    constructor(string memory _name, string memory _symbol)
+        ERC20(_name, _symbol)
+    {}
+
+    function initialize(
         address _collectionAddress,
         uint256 _tokenId,
-        uint256 _amount
-    ) ERC20(_name, _symbol) {
-        collectionAddress = IERC721A(_collectionAddress);
+        uint256 _amount,
+        uint256 _tokenPrice
+    ) external onlyOwner {
+        require(!initialized, "Already initalized");
+        collectionAddress = IERC721(_collectionAddress);
         collectionAddress.safeTransferFrom(msg.sender, address(this), _tokenId);
         tokenId = _tokenId;
         initialized = true;
+        tokenSaleStarted = true;
+        tokenPrice = _tokenPrice;
         total = _amount;
-        emit tokenCreated(_name, _collectionAddress, _tokenId, _amount);
+        emit tokenCreated(_collectionAddress, _tokenId, _amount);
     }
 
     ///@dev - intialize the token sale for the NFT

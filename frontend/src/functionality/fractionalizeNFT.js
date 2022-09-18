@@ -19,31 +19,16 @@ export const account = async () => {
   );
 
   const { address, isConnected } = useAccount();
-  const [nfts, setNfts] = useState([]);
 
-  const fetchNFTs = async () => {
+  const fractionalize = async ({
+    _name,
+    _symbol,
+    _collectionAddress,
+    _tokenId,
+    _amount,
+  }) => {
     try {
-      console.log("fetching the NFTs");
-      // fetch with metadata
-      const nftsForOwner = await alchemy.nft.getNftsForOwner(address, {
-        withMetadata: true,
-      });
-      const filteredNFTs = [];
-      for (const nft of nftsForOwner.ownedNfts) {
-        console.log("contract address:", nft.contract.address);
-        if (nft.contract.address == NFT_Contract_adddress) {
-          filteredNFTs.push(nft);
-        }
-      }
-      console.log(filteredNFTs);
-      setNfts(filteredNFTs);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const fractionalize = async ({}) => {
-    try {
+      console.log("fractionalize the NFT");
       const data = await createToken([
         _name,
         _symbol,

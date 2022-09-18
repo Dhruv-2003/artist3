@@ -19,13 +19,7 @@ contract NFTFraction {
         uint256 _tokenId,
         uint256 _amount
     ) public {
-        TokensforNFT _token = new TokensforNFT(
-            _name,
-            _symbol,
-            _collectionAddress,
-            _tokenId,
-            _amount
-        );
+        TokensforNFT _token = new TokensforNFT(_name, _symbol);
         fractionalizedTokens[_collectionAddress][_tokenId] = _token;
         _tokensintialized.push(_token);
     }
