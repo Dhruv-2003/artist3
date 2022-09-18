@@ -1,26 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 import OwnNFT from "../src/components/OwnNFT";
 
 import { Network, Alchemy } from "alchemy-sdk";
-import { NFT_Contract_adddress } from "../constants";
+import { NFT_Contract_adddress } from "../src/constants";
+import { useAccount, useContract, useProvider, useSigner } from "wagmi";
+
 const settings = {
   apiKey: "bZFiL-IFAMe4QAh9Q30gDQ7m1vxEss4u", // Replace with your Alchemy API Key.
   network: Network.MATIC_MUMBAI, // Replace with your network.
 };
-import { useContract } from "@thirdweb-dev/react";
 
 const alchemy = new Alchemy(settings);
 
 export default function account() {
-  const { contract } = useContract(
-    "0x50d41B2a3450f18815880DB8E2faE35d8D7DA06E"
-  );
-  const { mutateAsync: createToken, isLoading } = useContractWrite(
-    contract,
-    "createToken"
-  );
-
   const { address, isConnected } = useAccount();
   const [nfts, setNfts] = useState([]);
 
@@ -37,8 +30,12 @@ export default function account() {
       });
       const filteredNFTs = [];
       for (const nft of nftsForOwner.ownedNfts) {
-        console.log("contract address:", nft.contract.address);
-        if (nft.contract.address == NFT_Contract_adddress) {
+        // console.log(nft);
+        if (
+          nft.contract.address.toLowerCase() ==
+          NFT_Contract_adddress.toLowerCase()
+        ) {
+          console.log(nft);
           filteredNFTs.push(nft);
         }
       }
@@ -52,7 +49,11 @@ export default function account() {
   return (
     <div className={styles.main}>
       <h1 className={styles.heading}>Owned NFTs</h1>
-      <div className={styles.collection}>nfts.map((nft=>{})</div>
+      <div className={styles.collection}>
+        {nfts.map((nft) => {
+          return <OwnNFT nft={nft} key={nft.tokenId} />;
+        })}
+      </div>
     </div>
   );
 }
