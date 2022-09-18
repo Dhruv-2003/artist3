@@ -32,7 +32,7 @@ export const DeployData = async ({ Name, Description, imageURI }) => {
   Note: Hash in response is CID.
 */
 
-  const metadatURI = `ipfs://${output.Hash}`;
+  const metadatURI = `https://ipfs.io/ipfs/${output.Hash}`;
   console.log("Visit at https://ipfs.io/ipfs/" + output.Hash);
 
   return metadatURI;
