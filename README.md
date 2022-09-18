@@ -61,10 +61,10 @@ We want to build the marketplace section first and enable the trading of NFT and
 * ThirdWeb contract deploy , release - To Release the NFT Fractionalization token and deploy all the contracts in just one click
 * Thirdweb Dashboard - to control all the feature in the contracts deployed and manage the Backend code of the same
 
-Links for thirdweb track one custom contracts + bonus (release)
-   - https://thirdweb.com/0xe22ecbba8fb9c0124eecb6afe0bf6a487424989f
-   - https://thirdweb.com/0xe22eCBbA8fB9C0124eeCb6AfE0bf6A487424989f/TokensforNFT/1.0.1
-   - https://thirdweb.com/0xe22eCBbA8fB9C0124eeCb6AfE0bf6A487424989f/Artist3/1.0.0
+**Links for thirdweb track one custom contracts + bonus (release)**   
+- https://thirdweb.com/0xe22ecbba8fb9c0124eecb6afe0bf6a487424989f
+- https://thirdweb.com/0xe22eCBbA8fB9C0124eeCb6AfE0bf6A487424989f/TokensforNFT/1.0.1
+- https://thirdweb.com/0xe22eCBbA8fB9C0124eeCb6AfE0bf6A487424989f/Artist3/1.0.0
 https://thirdweb.com/mumbai/0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470/
 
 ## Team Members
