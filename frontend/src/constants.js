@@ -8,7 +8,6 @@ export const NFT_Contract_adddress =
 
 export const NFT_Fraction_Address =
   "0x787FD6F86c692B8FbB0452B399fd5302201BFf79";
-
 import abi_nft_Contract from "../../thirdweb-contracts/artifacts/contracts/NFTCollection.sol/Artist3.json";
 export const NFT_Contract_abi = abi_nft_Contract;
 

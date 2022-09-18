@@ -77,16 +77,21 @@
   padding: 8px 12px;
   font-size: 16px;
   margin: 5px 0;
+  background-color: #c8c6f6;
+  color: rgb(24, 29, 47);
+
 }
 
 .create_form textarea {
   border-radius: 5px;
   width: 100%;
-  height: 150px;
+  height: 250px;
   margin: 5px 0;
   padding: 10px;
   margin: 8px auto;
   font-size: 16px;
+  background-color: #c8c6f6;
+  resize: vertical;
 }
 
 .btn {
@@ -330,6 +335,49 @@
 
 .active_content {
   display: block;
+}
+
+.feature {
+  text-align: center;
+  margin: 15px;
+  max-width: 400px;
+  height: 200px;
+  padding: 1.5rem 2rem;
+  border: 2px solid rgb(49, 64, 106);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  transition: .2s ease-in-out;
+}
+
+.feature:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+  color: rgb(16, 19, 32);
+}
+
+.feature::before {  
+  transform: scaleX(0);
+  transform-origin: bottom right;
+}
+
+.feature:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.feature::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  inset: 0 0 0 0;
+  background: #adacffe4;
+  border-radius: 10px;
+  z-index: -1;
+  transition: transform .7s ease;
 }
 
 @media only screen and (max-width: 768px) {
