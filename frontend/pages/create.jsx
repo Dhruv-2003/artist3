@@ -36,9 +36,20 @@ export default function create() {
       console.log(url);
       setIpfsUri(url);
       console.log("NFT metadata uploaded to IPFS");
-      await mintNFT(address, url);
+      await mintNFT(url);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  // mints the NFT for the user
+  const mintNFT = async (_tokenURI) => {
+    try {
+      const data = await NFT_Contract.mintTo(address, _tokenURI);
+      await data.wait();
+      console.info("NFT minted");
+    } catch (err) {
+      console.error("contract call failure", err);
     }
   };
 
@@ -75,17 +86,6 @@ export default function create() {
   //     console.error("contract call failure", err);
   //   }
   // };
-
-  // mints the NFT for the user
-  const mintNFT = async ({ _to, _tokenURI }) => {
-    try {
-      const data = await NFT_Contract.mintTo(_to, _tokenURI);
-      await data.wait();
-      console.info("NFT minted");
-    } catch (err) {
-      console.error("contract call failure", err);
-    }
-  };
 
   return (
     <div className={styles.main}>
