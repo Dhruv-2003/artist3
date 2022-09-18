@@ -26,21 +26,12 @@ export default function Home() {
               peroid of time
             </span>
             <div className={styles.buttons}>
-              <button className={styles.btn}>Marketplace</button>
               <button className={styles.btn}>Create Listing</button>
+              <button className={styles.btn2}>Marketplace</button>
             </div>
           </div>
           <div className={styles.image}>
             <Image className={styles.image} src={image} />
-            {/* <div className={styles.nft_showcase}>
-              <Image className={styles.nft_showcase} src={img1} />
-            </div>
-            <div className={styles.nft_showcase}>
-              <Image className={styles.nft_showcase} src={img2} />
-            </div>
-            <div className={styles.nft_showcase}>
-              <Image className={styles.nft_showcase} src={img3} />
-            </div> */}
           </div>
         </main>
       </div>
