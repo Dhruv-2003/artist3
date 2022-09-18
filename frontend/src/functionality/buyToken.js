@@ -1,4 +1,4 @@
-import { useContract } from "@thirdweb-dev/react";
+// import { useContract } from "@thirdweb-dev/react";
 import React, { useState, useEffect } from "react";
 /// same collection address for all the NFTs created by the artists
 import { NFT_Contract_adddress, Token_abi } from "../constants";
@@ -6,9 +6,8 @@ import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import { useContractRead, useContractWrite } from "@thirdweb-dev/react";
 
-export const buyToken = async () => {
+export const BuyToken = async () => {
   const [tokenAddress, settokenAddress] = useState("");
   const [tokenPrice, setTokenPrice] = useState(0);
   const [qty, setQty] = useState(0);
@@ -22,10 +21,6 @@ export const buyToken = async () => {
     contractInterface: Token_abi,
     signerOrProvider: signer || provider,
   });
-
-  const { NFT_contract } = useContract(
-    "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
-  );
 
   const { address, isConnected } = useAccount();
   const provider = useProvider();
@@ -42,13 +37,10 @@ export const buyToken = async () => {
     setAmount(qty * tokenPrice);
   }, [qty]);
 
-  const fetchTokenData = async ({ _tokenAddress }) => {
+  const FetchTokenData = async ({ _tokenAddress }) => {
     try {
       const data = await Token_Contract.tokenId();
       const tokenId = parseInt(data.hex._value);
-
-      const { response } = useContractRead(NFT_contract, "tokenURI", tokenId);
-
       console.log(response);
       /// filter the NFT URI from the link and then
 

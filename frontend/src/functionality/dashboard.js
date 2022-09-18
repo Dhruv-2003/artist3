@@ -5,7 +5,7 @@ import { NFT_Contract_adddress, Token_abi } from "../constants";
 import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
 
-export const dashboard = async () => {
+export const Dashboard = async () => {
   const [_tokenAddress, set_tokenAddress] = useState("");
   const [tokenPrice, setTokenPrice] = useState(0);
   const [NFTPrice, setNFTPrice] = useState(0);

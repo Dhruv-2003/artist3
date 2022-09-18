@@ -1,21 +1,21 @@
-import { useContract } from "@thirdweb-dev/react";
+// import { useContract } from "@thirdweb-dev/react";
 import React, { useState, useEffect } from "react";
 /// same collection address for all the NFTs created by the artists
 import { NFT_Contract_adddress, Token_abi } from "../constants";
 import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
 import { ethers } from "ethers";
-import { useContractRead } from "@thirdweb-dev/react";
+// import { useContractRead } from "@thirdweb-dev/react";
 
-export const buyToken = async () => {
+export const BuyToken = async () => {
   const [tokens, setTokens] = useState([]);
 
-  const { NFT_contract } = useContract(
-    "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
-  );
-  const { Fraction_contract } = useContract(
-    "0x787FD6F86c692B8FbB0452B399fd5302201BFf79"
-  );
+  // const { NFT_contract } = useContract(
+  //   "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
+  // );
+  // const { Fraction_contract } = useContract(
+  //   "0x787FD6F86c692B8FbB0452B399fd5302201BFf79"
+  // );
 
   const { address, isConnected } = useAccount();
   const provider = useProvider();
@@ -23,12 +23,12 @@ export const buyToken = async () => {
 
   useEffect(async () => {}, []);
 
-  const fetchNFTs = async () => {
+  const FetchNFTs = async () => {
     try {
-      const { data, isLoading } = useContractRead(
-        Fraction_contract,
-        "getTokens"
-      );
+      // const { data, isLoading } = useContractRead(
+      //   Fraction_contract,
+      //   "getTokens"
+      // );
       // array of all the addresses
       const promises = [];
       data.map((token) => {
@@ -50,11 +50,11 @@ export const buyToken = async () => {
 
   const fetchTokenData = async ({ _tokenAddress }) => {
     try {
-      const Contract = useContract({
-        addressOrName: _tokenAddress,
-        contractInterface: Token_abi,
-        signerOrProvider: signer || provider,
-      });
+      // const Contract = useContract({
+      //   addressOrName: _tokenAddress,
+      //   contractInterface: Token_abi,
+      //   signerOrProvider: signer || provider,
+      // });
 
       // fetch the tokenId
       const data = await Contract.tokenId();
@@ -69,8 +69,8 @@ export const buyToken = async () => {
       const _total = await Token_Contract.total();
       const total_ = parseInt(_total.hex._value);
 
-      // filter the address first
-      const { response } = useContractRead(NFT_contract, "tokenURI", tokenId);
+      // // filter the address first
+      // const { response } = useContractRead(NFT_contract, "tokenURI", tokenId);
       console.log(response);
       /// filter the NFT URI from the link and then
 
@@ -98,11 +98,11 @@ export const buyToken = async () => {
 
   const checkToken = async ({ _tokenAddress }) => {
     try {
-      const Token_Contract = useContract({
-        addressOrName: _tokenAddress,
-        contractInterface: Token_abi,
-        signerOrProvider: signer || provider,
-      });
+      // const Token_Contract = useContract({
+      //   addressOrName: _tokenAddress,
+      //   contractInterface: Token_abi,
+      //   signerOrProvider: signer || provider,
+      // });
 
       const data = await Token_Contract.tokenSaleStarted();
 

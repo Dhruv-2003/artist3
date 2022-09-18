@@ -5,7 +5,7 @@ import { ethers, utils } from "ethers";
 import { StoreData } from "./storeData";
 import { DeployData } from "./storeNFT";
 
-export const mint = async () => {
+export const Mint = async () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState([]);

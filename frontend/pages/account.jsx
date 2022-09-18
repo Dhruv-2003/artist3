@@ -4,8 +4,12 @@ import OwnNFT from "../src/components/OwnNFT";
 
 import { Network, Alchemy } from "alchemy-sdk";
 import { NFT_Contract_adddress } from "../src/constants";
-import { useAccount, useContract, useProvider, useSigner } from "wagmi";
-
+import { useAccount, useProvider, useSigner } from "wagmi";
+import {
+  useContract,
+  useContractRead,
+  useContractWrite,
+} from "@thirdweb-dev/react";
 const settings = {
   apiKey: "bZFiL-IFAMe4QAh9Q30gDQ7m1vxEss4u", // Replace with your Alchemy API Key.
   network: Network.MATIC_MUMBAI, // Replace with your network.
