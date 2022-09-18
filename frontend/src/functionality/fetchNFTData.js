@@ -6,11 +6,7 @@ import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import {
-  useContract,
-  useContractRead,
-  useContractWrite,
-} from "@thirdweb-dev/react";
+import { useContractRead, useContractWrite } from "@thirdweb-dev/react";
 
 export const buyToken = async () => {
   const [tokenAddress, settokenAddress] = useState("");

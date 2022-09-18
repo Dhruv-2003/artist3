@@ -13,7 +13,7 @@ const settings = {
 
 const alchemy = new Alchemy(settings);
 
-export default function account() {
+export default function Account() {
   const { address, isConnected } = useAccount();
   const [nfts, setNfts] = useState([]);
 

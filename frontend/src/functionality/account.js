@@ -6,7 +6,11 @@ const settings = {
   network: Network.MATIC_MUMBAI, // Replace with your network.
 };
 import { useContract } from "@thirdweb-dev/react";
-
+import {
+  useContract,
+  useContractRead,
+  useContractWrite,
+} from "@thirdweb-dev/react";
 const alchemy = new Alchemy(settings);
 
 export const account = async () => {

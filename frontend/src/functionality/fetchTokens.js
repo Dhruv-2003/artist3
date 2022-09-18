@@ -5,7 +5,7 @@ import { NFT_Contract_adddress, Token_abi } from "../constants";
 import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
 import { ethers } from "ethers";
-import { useContract, useContractRead } from "@thirdweb-dev/react";
+import { useContractRead } from "@thirdweb-dev/react";
 
 export const buyToken = async () => {
   const [tokens, setTokens] = useState([]);

@@ -1,4 +1,4 @@
-import { useContract } from "@thirdweb-dev/react";
+// import { useContract } from "@thirdweb-dev/react";
 import React, { useState, useEffect } from "react";
 /// same collection address for all the NFTs created by the artists
 import { NFT_Contract_adddress, Token_abi } from "../constants";

@@ -18,7 +18,6 @@ import { useContract, useContractRead } from "@thirdweb-dev/react";
 // import { useContract, useContractRead } from "@thirdweb-dev/react";
 // import { ethers } from "ethers";
 
-
 export default function marketplace() {
   const [toggleState, setToggleState] = useState(1);
 
@@ -134,78 +133,75 @@ export default function marketplace() {
     }
   };
 
+  // fetch NFTs
 
-// fetch NFTs
+  const [nfts, setNfts] = useState([]);
 
-const [nfts, setNfts] = useState([]);
+  useEffect(async () => {}, []);
 
+  // async function fetchNFTs() {
+  //   try {
+  //     const { data, isLoading } = useContractRead(
+  //       Fraction_contract,
+  //       "getTokens"
+  //     );
+  //     // array of all the addresses
+  //     const promises = [];
+  //     data.map((nft) => {
+  //       const response = checkToken(nft);
+  //       if (response == true) {
+  //         const data = fetchTokenData(nft);
+  //         promises.push(data);
+  //       }
+  //     });
+  //     const _nfts = await Promise.all(promises);
 
+  //     /// filtered and all the needed data is fetched and stored as objects in the array of NFT
+  //     console.log(_nfts);
+  //     setNfts(_nfts);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
-useEffect(async () => {}, []);
+  // async function fetchTokenData({ _tokenAddress }) {
+  //   try {
+  //     const Contract = useContract({
+  //       addressOrName: _tokenAddress,
+  //       contractInterface: Token_abi,
+  //       signerOrProvider: signer || provider,
+  //     });
 
-  async function fetchNFTs() {
-    try {
-      const { data, isLoading } = useContractRead(
-        Fraction_contract,
-        "getTokens"
-      );
-      // array of all the addresses
-      const promises = [];
-      data.map((nft) => {
-        const response = checkToken(nft);
-        if (response == true) {
-          const data = fetchTokenData(nft);
-          promises.push(data);
-        }
-      });
-      const _nfts = await Promise.all(promises);
+  //     // fetch the tokenId
+  //     const data = await Contract.tokenId();
+  //     const tokenId = parseInt(data.hex._value);
 
-      /// filtered and all the needed data is fetched and stored as objects in the array of NFT
-      console.log(_nfts);
-      setNfts(_nfts);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  //     /// price is stored in form of wei
+  //     const _price = await Token_Contract.salePrice();
+  //     const price_ = parseInt(_price.hex._value);
+  //     // filter the address first
+  //     const { response } = useContractRead(NFT_contract, "tokenURI", tokenId);
+  //     console.log(response);
+  //     /// filter the NFT URI from the link and then
+  //     const metadata = await fetch(tokenURI);
+  //     const metadataJSON = await metadata.json();
+  //     console.log(metadataJSON);
 
-  async function fetchTokenData({ _tokenAddress }) {
-    try {
-      const Contract = useContract({
-        addressOrName: _tokenAddress,
-        contractInterface: Token_abi,
-        signerOrProvider: signer || provider,
-      });
+  //     const NFT = {
+  //       name: metadataJSON.name,
+  //       description: metadataJSON.description,
+  //       image: metadataJSON.image,
+  //       price: ethers.utils.formatEther(price_),
+  //       tokenAddress: _tokenAddress,
+  //       tokenId: tokenId,
+  //       collectionAddress: NFT_Contract_adddress,
+  //     };
 
-      // fetch the tokenId
-      const data = await Contract.tokenId();
-      const tokenId = parseInt(data.hex._value);
-
-      /// price is stored in form of wei
-      const _price = await Token_Contract.salePrice();
-      const price_ = parseInt(_price.hex._value);
-      // filter the address first
-      const { response } = useContractRead(NFT_contract, "tokenURI", tokenId);
-      console.log(response);
-      /// filter the NFT URI from the link and then
-      const metadata = await fetch(tokenURI);
-      const metadataJSON = await metadata.json();
-      console.log(metadataJSON);
-
-      const NFT = {
-        name: metadataJSON.name,
-        description: metadataJSON.description,
-        image: metadataJSON.image,
-        price: ethers.utils.formatEther(price_),
-        tokenAddress: _tokenAddress,
-        tokenId: tokenId,
-        collectionAddress: NFT_Contract_adddress,
-      };
-
-      return NFT;
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  //     return NFT;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   async function checkToken({ _tokenAddress }) {
     try {

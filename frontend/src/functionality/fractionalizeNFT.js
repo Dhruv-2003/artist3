@@ -3,11 +3,7 @@ import React, { useState, useEffect } from "react";
 import { NFT_Contract_adddress, Token_abi } from "../constants";
 import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
-import {
-  useContract,
-  useContractRead,
-  useContractWrite,
-} from "@thirdweb-dev/react";
+import { useContractRead, useContractWrite } from "@thirdweb-dev/react";
 
 export const fractionalization = async () => {
   const [tokenId, settokenId] = useState(0);

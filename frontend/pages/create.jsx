@@ -7,7 +7,7 @@ import { useAccount, useContract, useProvider, useSigner } from "wagmi";
 import { StoreMetadata } from "../src/functionality/StoreMetadata";
 import { NFT_Contract_abi, NFT_Contract_adddress } from "../src/constants";
 
-export default function create() {
+export default function Create() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState([]);

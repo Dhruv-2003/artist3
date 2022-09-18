@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
 import { ethers, utils } from "ethers";
-import { useContract } from "@thirdweb-dev/react";
+// import { useContract } from "@thirdweb-dev/react";
 import { StoreData } from "./storeData";
 import { DeployData } from "./storeNFT";
 
