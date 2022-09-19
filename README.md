@@ -1,6 +1,6 @@
 # Artist3
 
-Artist3 is a NFT marketplace for digital artists using which artists can mint their artwork as NFTs for proof , the best part is they can also decide to sell the NFT in **fractions** and eanr a wholesome amount, all on a single platform.
+Artist3 is a NFT marketplace for digital artists using which artists can mint their artwork as NFTs for proof , the best part is they can also decide to sell the NFT in **fractions** and earn a wholesome amount, all on a single platform. Token holders also earn profit for holding the NFT Tokens for a period of time 
 
 ## Features
 
@@ -17,20 +17,10 @@ Live link : http://artist3.vercel.app/
 ## How we built it
 There are three main pages in the app: 
 1. Create page, where you can upload your art by filling a form
-2. Marketplace, all the live token and NFTs are lisited here
-3. Accounts , you can see all your NFTs in account page from where you can choose how you want to list the NFT in the marketplace, choosing from two options , either publish as NFT or publish as fractions.
-
-## Challenges we ran into
-1. Designing the UX, we wanted to keep the UX simple so that anyone can use the app, we had 2 choice for this, either we implement some similar functionalities in single page or keep them separate, we choose the later one, because this way we saved some time in integration and could focus on other problems.
-
-2. Implementing the thirdweb release and deploy feature in our dApp , we have used thirdweb for the first time so we ran into issue while configuring with the frontend SDK
-
-3. Understanding and implementing the NFT Fraction logic and the marketplace idea of how to sell NFT and token together
-
-4. Using lighthouse for the first time , made us get into bunch of issues , and after trying we were not able to resolve it
-
-### What's next for project
-We want to build the marketplace section first and enable the trading of NFT and Tokens together on the same platform , part under build . 
+2. Marketplace, all the live token and NFTs are lisited here for selling and trading
+3. Accounts , you can see all your NFTs in account page from where you can choose how you want to list the NFT in the marketplace, choosing from two options , either publish as NFT or publish as fractions. Fractionalize the NFTs from the same page and even control the sale of these assets .
+4. Tokens and NFTs are sold separatly on the marketplace , so when the whole NFT is bought the token holders get to reedem thier tokens for the increased value as the Price of the NFT is higher than the one paid earlier
+5. Landing page lists all the feature of the platform that we currently offer and are enabled for all the users
 
 ## Technologies Used 
 
@@ -61,6 +51,19 @@ Link of deployed contract
 * NFT Collection Contract - NFT Collection that mints all the NFTs uploaded via the artists
 * NFT Fractions Manager  - Manages and creates all the new ERC20 tokens contracts for each NFT that is fractionalized
 * TokensForNFT contrat - NFT fractionalization , convert any ERC721 unto ERC20 token , and control the sale of token and NFT Together on the same platform
+
+
+## Challenges we ran into
+1. Designing the UX, we wanted to keep the UX simple so that anyone can use the app, we had 2 choice for this, either we implement some similar functionalities in single page or keep them separate, we choose the later one, because this way we saved some time in integration and could focus on other problems.
+
+2. Implementing the thirdweb release and deploy feature in our dApp , we have used thirdweb for the first time so we ran into issue while configuring with the frontend SDK
+
+3. Understanding and implementing the NFT Fraction logic and the marketplace idea of how to sell NFT and token together
+
+4. Using lighthouse for the first time , made us get into bunch of issues , and after trying we were not able to resolve it
+
+## What's next for project
+We want to build the remaining marketplace section first and enable the trading of NFT and Tokens together on the same platform , part under build . 
 
 ## Team Members
 [**Dhruv Agarwal** ](https://twitter.com/0xdhruva)- Backend and Integration
