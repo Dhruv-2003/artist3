@@ -1,16 +1,17 @@
 # Artist3
 
-Artist3 is a NFT marketplace for artists using which artists can upload their work as NFTs, the best part is they can also decide to sell the NFT in **fractions**, all on a single platform.
+Artist3 is a NFT marketplace for digital artists using which artists can mint their artwork as NFTs for proof , the best part is they can also decide to sell the NFT in **fractions** and eanr a wholesome amount, all on a single platform.
 
-Features
-- All assets stored on decentralized storage like IPFS
-- Own a art piece , NFT just for fractions of the cost
-- Earn a wholesome profit from holding tokens for a short period of time
-- Mint Digital Proof as NFT for your Artwork for free in under 60 secs
-- Control the Sale of NFT and tokens for your artwork
-- Buy tokens/fractions of the NFTs and NFTs at the same platform
+## Features
 
-http://artist3.vercel.app/
+* All assets stored on decentralized storage like IPFS
+* Own a art piece , NFT just for fractions of the cost
+* Earn a wholesome profit from holding tokens for a short period of time
+* Mint Digital Proof as NFT for your Artwork for free in under 60 secs
+* Control the Sale of NFT and tokens for your artwork
+* Buy tokens/fractions of the NFTs and NFTs at the same platfor
+
+Live link : http://artist3.vercel.app/
 
 
 ## How we built it
@@ -29,18 +30,9 @@ There are three main pages in the app:
 4. Using lighthouse for the first time , made us get into bunch of issues , and after trying we were not able to resolve it
 
 ### What's next for project
-We want to build the marketplace section first and enable the trading of NFT and Tokens together on the same platform
+We want to build the marketplace section first and enable the trading of NFT and Tokens together on the same platform , part under build . 
 
-## Features
-
-* All assets stored on decentralized storage like IPFS
-* Own a art piece , NFT just for fractions of the cost
-* Earn a wholesome profit from holding tokens for a short period of time
-* Mint Digital Proof as NFT for your Artwork for free in under 60 secs
-* Control the Sale of NFT and tokens for your artwork
-* Buy tokens/fractions of the NFTs and NFTs at the same platfor
-
-## How is it Built
+## Technologies Used 
 
 **Front-end**
 * HTML
@@ -50,22 +42,25 @@ We want to build the marketplace section first and enable the trading of NFT and
 * IPFS - To store Art data on decentralized storage
 * lighthouse - Store data permanently on IPFS after getting signed by the user https://lighthouse-1.gitbook.io/lighthouse-1/lighthouse-sdk/code-examples/browser-frontend/browser
 * nft.storage - store the details of the NFT on IPFS directly
-* ThirdwebSDK: Used to integrate our frontend with the blockchain and the contracts and implement the funcctionality
+* ThirdwebSDK - Used to integrate our frontend with the blockchain and the contracts and implement the funcctionality
 
 **Backend**
 * 
 * Solidity - For smart-contracts development and creation of the Smart contracts
-* NFT Collection Contract
-* NFT Fractions Manager
-* TokensForNFT contrat - NFT fractionalization
-* ThirdWeb contract deploy , release - To Release the NFT Fractionalization token and deploy all the contracts in just one click
+* ThirdWeb contract deploy , release - To Release the NFT Fractionalization token and deploy all the contracts in just one click .
 * Thirdweb Dashboard - to control all the feature in the contracts deployed and manage the Backend code of the same
 
 **Links for thirdweb track one custom contracts + bonus (release)**   
 - https://thirdweb.com/0xe22ecbba8fb9c0124eecb6afe0bf6a487424989f
 - https://thirdweb.com/0xe22eCBbA8fB9C0124eeCb6AfE0bf6A487424989f/TokensforNFT/1.0.1
 - https://thirdweb.com/0xe22eCBbA8fB9C0124eeCb6AfE0bf6A487424989f/Artist3/1.0.0
-https://thirdweb.com/mumbai/0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470/
+Link of deployed contract
+-https://thirdweb.com/mumbai/0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470/
+
+**Contracts**
+* NFT Collection Contract - NFT Collection that mints all the NFTs uploaded via the artists
+* NFT Fractions Manager  - Manages and creates all the new ERC20 tokens contracts for each NFT that is fractionalized
+* TokensForNFT contrat - NFT fractionalization , convert any ERC721 unto ERC20 token , and control the sale of token and NFT Together on the same platform
 
 ## Team Members
 [**Dhruv Agarwal** ](https://twitter.com/0xdhruva)- Backend and Integration
