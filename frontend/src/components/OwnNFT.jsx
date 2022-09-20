@@ -14,7 +14,7 @@ import {
 } from "../constants";
 import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
-import { Contract } from "ethers";
+import { Contract, ethers } from "ethers";
 
 export default function OwnNFT(props) {
   const [tokenId, settokenId] = useState(0);
@@ -24,7 +24,8 @@ export default function OwnNFT(props) {
   const [symbol, setSymbol] = useState("");
   const [tokenAddress, setTokenAddress] = useState("");
   const [isOwner, setIsOwner] = useState(false);
-  const [price, setPrice] = useState(0);
+  const [nftPrice, setNftPrice] = useState("");
+  const [tokenPrice, setTokenPrice] = useState("");
 
   const [tokenSale, setTokenSale] = useState(false);
   const [nftSale, setNftSale] = useState(false);
@@ -52,9 +53,11 @@ export default function OwnNFT(props) {
     signerOrProvider: signer || provider,
   });
 
-  useEffect(() => {
-    settokenId(nft.tokenId);
-    checkOwner();
+  useEffect(async () => {
+    // settokenId(nft.tokenId);
+    // checkOwner();
+    // await fetchAddress();
+    // checkStatus(tokenAddress);
   }, [nft]);
 
   const handlefractionalize = async () => {
@@ -216,7 +219,8 @@ export default function OwnNFT(props) {
     try {
       const Token_Contract = new Contract(_tokenAddress, Token_abi, signer);
       console.log("Starting the sale for the tokens...");
-      const tx = await Token_Contract.initializeSale(tokenPrice);
+      const _price = ethers.utils.parseEther(tokenPrice);
+      const tx = await Token_Contract.initializeSale(_price);
       await tx.wait();
       console.log("Token Sale started");
     } catch (err) {
@@ -228,7 +232,8 @@ export default function OwnNFT(props) {
     try {
       const Token_Contract = new Contract(_tokenAddress, Token_abi, signer);
       console.log("Starting the sale for the NFTs...");
-      const tx = await Token_Contract.putForSale(NFTPrice);
+      const _price = ethers.utils.parseEther(nftPrice);
+      const tx = await Token_Contract.putForSale(_price);
       await tx.wait();
       console.log("NFT Sale started");
     } catch (err) {
@@ -297,23 +302,38 @@ export default function OwnNFT(props) {
           {intialized ? (
             <div>
               {!nftSale ? (
-                <button
-                  onClick={startNFTSale(tokenAddress)}
-                  className={`${styles2.btn} ${styles2.center}`}
-                >
-                  Start NFT Sale
-                </button>
+                <>
+                  <button
+                    onClick={() => startNFTSale(tokenAddress)}
+                    className={`${styles2.btn} ${styles2.center}`}
+                  >
+                    Start NFT Sale
+                  </button>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={nftPrice}
+                    onChange={(e) => setNftPrice(e.target.value)}
+                  />
+                </>
               ) : (
                 <a></a>
               )}
-
               {!tokenSale ? (
-                <button
-                  onClick={startTokenSale(tokenAddress)}
-                  className={`${styles2.btn} ${styles2.center}`}
-                >
-                  Start Token Sale
-                </button>
+                <>
+                  <button
+                    onClick={() => startTokenSale(tokenAddress)}
+                    className={`${styles2.btn} ${styles2.center}`}
+                  >
+                    Start Token Sale
+                  </button>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={tokenPrice}
+                    onChange={(e) => setTokenPrice(e.target.value)}
+                  />
+                </>
               ) : (
                 <a></a>
               )}

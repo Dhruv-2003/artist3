@@ -9,7 +9,9 @@ contract NFTFraction {
         public fractionalizedTokens;
 
     // stores all the tokensintialized
-    TokensforNFT[] public _tokensintialized;
+    // TokensforNFT[] public _tokensintialized;
+
+    mapping(address => TokensforNFT[]) public _tokensintialized;
 
     /// create a new token for the NFT  , check approval before and then allow it
     function createToken(
@@ -21,7 +23,7 @@ contract NFTFraction {
     ) public returns (address) {
         TokensforNFT _token = new TokensforNFT(_name, _symbol);
         fractionalizedTokens[_collectionAddress][_tokenId] = _token;
-        _tokensintialized.push(_token);
+        _tokensintialized[msg.sender].push(_token);
         return address(_token);
     }
 
