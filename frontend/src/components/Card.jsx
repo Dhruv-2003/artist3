@@ -6,6 +6,7 @@ import Link from "next/link";
 import image from "../assets/3.png";
 
 export default function Card(props) {
+  const nft = props.nft;
   return (
     <div className={styles.card}>
       <div className={styles.image}>
@@ -22,9 +23,11 @@ export default function Card(props) {
         <h3>
           <u>NFT title here</u>
         </h3>
-        <h4>Price {props.price}</h4>
-        <Link href={`/nft/${props.id}`}>
-          <button className={`${styles2.btn} ${styles2.center}`}>NFT Details</button>
+        <h4>Price {nft.price}</h4>
+        <Link href={`/nft/${nft.id}`}>
+          <button className={`${styles2.btn} ${styles2.center}`}>
+            NFT Details
+          </button>
         </Link>
       </div>
     </div>

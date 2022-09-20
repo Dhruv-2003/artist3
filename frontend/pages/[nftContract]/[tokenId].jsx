@@ -5,8 +5,13 @@ import Image from "next/image";
 // import { useContract } from "@thirdweb-dev/react";
 import React, { useState, useEffect } from "react";
 /// same collection address for all the NFTs created by the artists
-import { NFT_Contract_adddress, Token_abi } from "../../src/constants";
-import { isAddress } from "ethers/lib/utils";
+import {
+  NFT_Contract_adddress,
+  NFT_Contract_abi,
+  Token_abi,
+  NFT_Fraction_Address,
+  NFT_Fraction_abi,
+} from "../../src/constants";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
@@ -20,20 +25,15 @@ export default function NFT(props) {
   // buy nft
 
   const [tokenAddress, settokenAddress] = useState("");
+  const [tokenId, setTokenId] = useState(0);
+  const [nftAddress, setNftAddress] = useState("");
   const [nfPrice, setnfPrice] = useState(0);
   const [price, setPrice] = useState("");
   const [data, setData] = useState({});
 
   const router = useRouter();
-  const nftAddress = router.query.nftContract;
-  const tokenId = router.query.tokenId;
-
-  // const { NFT_contract } = useContract(
-  //   "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
-  // );
-  // const { Fraction_contract } = useContract(
-  //   "0x787FD6F86c692B8FbB0452B399fd5302201BFf79"
-  // );
+  const _nftAddress = router.query.nftContract;
+  const _tokenId = router.query.tokenId;
 
   const { address, isConnected } = useAccount();
   const provider = useProvider();
@@ -45,36 +45,60 @@ export default function NFT(props) {
     signerOrProvider: signer || provider,
   });
 
-  const FetchTokenData = async ({ _tokenAddress }) => {
+  const Fraction_contract = useContract({
+    addressOrName: NFT_Fraction_Address,
+    contractInterface: NFT_Fraction_abi,
+    signerOrProvider: signer || provider,
+  });
+
+  const NFT_Contract = useContract({
+    addressOrName: NFT_Contract_adddress,
+    contractInterface: NFT_Contract_abi,
+    signerOrProvider: signer || provider,
+  });
+
+  useEffect(() => {
+    setNftAddress(_nftAddress);
+    setTokenId(_tokenId);
+    fetchAddress(_nftAddress, _tokenId);
+    fetchTokenData();
+  }, []);
+
+  const fetchAddress = async (_collectionAddress, _tokenId) => {
     try {
-      // const { address } = useContractRead(
-      //   Fraction_contract,
-      //   "getAddress",
-      //   nftAddress,
-      //   tokenId
-      // );
-
-      // filter the address first
-      settokenAddress(address);
-
-      // const { response } = useContractRead(NFT_contract, "tokenURI", tokenId);
-      console.log(response);
-      /// filter the NFT URI from the link and then
-
-      const metadata = await fetch(tokenURI);
-      const metadataJSON = await metadata.json();
-      console.log(metadataJSON);
-      setData(metadataJSON);
-
-      const _price = await Token_Contract.salePrice();
-      const price = parseInt(_price.hex._value);
-      setnfPrice(price);
+      const data = await Fraction_contract.getAddress(
+        _collectionAddress,
+        _tokenId
+      );
+      console.log(data);
+      const Token_address = data;
+      settokenAddress(Token_address);
+      return Token_address;
     } catch (err) {
       console.log(err);
     }
   };
 
-  const BuyNFT = async () => {
+  const fetchTokenData = async () => {
+    try {
+      const response = await NFT_Contract.tokenURI(tokenId);
+      console.log(response);
+      /// filter the NFT URI from the link and then
+
+      const metadata = await fetch(response);
+      const metadataJSON = await metadata.json();
+      console.log(metadataJSON);
+      setData(metadataJSON);
+
+      const _price = await Token_Contract.salePrice();
+      const price_ = parseInt(_price.hex._value);
+      setnfPrice(price_);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const buyNFT = async () => {
     try {
       console.log("Buying NFT .. ");
       const tx = await Token_Contract.purchaseNFT({
@@ -105,12 +129,19 @@ export default function NFT(props) {
           <div className={styles.buy}>
             <h3>Purchase NFT</h3>
             <label htmlFor="">You Pay</label>
-            <input type="number" />
-            <label htmlFor="">You Recieve</label>
-            <input type="number" />
+            <input
+              type="text"
+              onChange={(e) => setPrice(e.target.value)}
+              value={price}
+            />
+            {/* <label htmlFor="">You Recieve</label>
+            <input type="number" /> */}
             <h4 htmlFor="">Estimated Gas + Fees = $ 0.235 {props.gasfee}</h4>
             <hr className={styles.hr} />
-            <button className={`${styles.btn} ${styles.center}`}>
+            <button
+              onClick={buyNFT}
+              className={`${styles.btn} ${styles.center}`}
+            >
               Purchase
             </button>
           </div>

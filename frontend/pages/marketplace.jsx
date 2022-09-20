@@ -24,13 +24,6 @@ export default function Marketplace() {
 
   const [tokens, setTokens] = useState([]);
 
-  // const { NFT_contract } = useContract(
-  //   "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
-  // );
-  // const { Fraction_contract } = useContract(
-  //   "0x787FD6F86c692B8FbB0452B399fd5302201BFf79"
-  // );
-
   const { address, isConnected } = useAccount();
   const provider = useProvider();
   const { data: signer } = useSigner();
@@ -238,9 +231,9 @@ export default function Marketplace() {
             }
           >
             <div className={styles.collection}>
-              <Card />
-              <Card />
-              <Card />
+              {nfts.map((nft) => {
+                return <Card nft={nft} key={nft.tokenId} />;
+              })}
             </div>
           </div>
 
@@ -252,10 +245,9 @@ export default function Marketplace() {
             }
           >
             <div className={styles.collection}>
-              <TokenCard />
-              <TokenCard />
-              <TokenCard />
-              <TokenCard />
+              {tokens.map((token) => {
+                return <TokenCard token={token} key={token.tokenId} />;
+              })}
             </div>
           </div>
         </div>

@@ -5,16 +5,15 @@ import Image from "next/image";
 // import { useContract } from "@thirdweb-dev/react";
 import React, { useState, useEffect } from "react";
 /// same collection address for all the NFTs created by the artists
-import { NFT_Contract_adddress, Token_abi } from "../../src/constants";
+import {
+  NFT_Contract_adddress,
+  NFT_Contract_abi,
+  Token_abi,
+} from "../../src/constants";
 import { isAddress } from "ethers/lib/utils";
 import { useProvider, useSigner, useContract, useAccount } from "wagmi";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-// import {
-//   useContract,
-//   useContractRead,
-//   useContractWrite,
-// } from "@thirdweb-dev/react";
 
 export default function Token(props) {
   // buy token
@@ -23,8 +22,9 @@ export default function Token(props) {
   const [qty, setQty] = useState(0);
   const [amount, setAmount] = useState("");
   const [data, setData] = useState({});
+
   const router = useRouter();
-  const _tokenAddress = router.query.tokenContract;
+  const _tokenAddress = router.query.address;
 
   const { address, isConnected } = useAccount();
   const provider = useProvider();
@@ -36,9 +36,11 @@ export default function Token(props) {
     signerOrProvider: signer || provider,
   });
 
-  // const { NFT_contract } = useContract(
-  //   "0xF99FcE9c34d8ed38108425Ce39B6D4d4Cd3cb470"
-  // );
+  const NFT_Contract = useContract({
+    addressOrName: NFT_Contract_adddress,
+    contractInterface: NFT_Contract_abi,
+    signerOrProvider: signer || provider,
+  });
 
   useEffect(async () => {
     if (_tokenAddress) {
@@ -51,13 +53,12 @@ export default function Token(props) {
     setAmount(qty * tokenPrice);
   }, [qty]);
 
-  const fetchTokenData = async ({ _tokenAddress }) => {
+  const fetchTokenData = async (_tokenAddress) => {
     try {
       const data = await Token_Contract.tokenId();
       const tokenId = parseInt(data.hex._value);
 
-      // const { response } = useContractRead(NFT_contract, "tokenURI", tokenId);
-
+      const response = await NFT_Contract.tokenURI(tokenId);
       console.log(response);
       /// filter the NFT URI from the link and then
 
@@ -65,7 +66,7 @@ export default function Token(props) {
       const price = parseInt(_price.hex._value);
       setTokenPrice(price);
 
-      const metadata = await fetch(tokenURI);
+      const metadata = await fetch(response);
       const metadataJSON = await metadata.json();
       console.log(metadataJSON);
       setData(metadataJSON);
@@ -87,6 +88,7 @@ export default function Token(props) {
     }
   };
 
+  /// data is set for now , we can just set all the details after it is fetched properly
   return (
     <div className={styles.nft_page}>
       <h1 className={styles.heading}>Token Title here</h1>
@@ -105,10 +107,19 @@ export default function Token(props) {
           <div className={styles.buy}>
             <h3>Purchase Token</h3>
             <label htmlFor="">Enter amount of your choice</label>
-            <input type="number" />
-            <label htmlFor="">You will recieve {props.token} 20 Tokens</label>
+            <input
+              type="number"
+              onChange={(e) => setQty(e.target.value)}
+              value={qty}
+            />
+            <label htmlFor="">
+              You will recieve {props.token} {qty} Tokens
+            </label>
             <hr className={styles.hr} />
-            <button className={`${styles.btn} ${styles.center}`}>
+            <button
+              onClick={buyTokens}
+              className={`${styles.btn} ${styles.center}`}
+            >
               Get Tokens
             </button>
           </div>
